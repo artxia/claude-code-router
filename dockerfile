@@ -1,8 +1,8 @@
 FROM node:20-alpine
 
 RUN mkdir -p /code/src /app
-COPY ./claude-code-router/package*.json /code
-COPY ./claude-code-router/src /code/src
+COPY ./package*.json /code
+COPY ./src /code/src
 RUN cd /code && ls && \
     npm i && \
     npm run build && \
