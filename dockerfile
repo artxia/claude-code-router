@@ -1,12 +1,15 @@
 FROM node:20-alpine
 
+RUN mkdir -p /code/src /app
+COPY ./claude-code-router/package*.json /code
+COPY ./claude-code-router/src /code/src
+RUN cd /code && ls && \
+    npm i && \
+    npm run build && \
+    cp dist/* /app
+
 WORKDIR /app
-
-COPY package*.json ./
-RUN npm i
-
-COPY . .
 
 EXPOSE 3456
 
-CMD ["node", "index.mjs"]
+CMD ["node", "cli.js", "start"]
